@@ -1,0 +1,11 @@
+framework:
+  messenger:
+    transports:
+      async:
+        dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+        options:
+          stream: review-stream
+          group: review-group
+          delete_after_ack: true
+    routing:
+      'App\Task\Message\ReviewCreatedMessage': async

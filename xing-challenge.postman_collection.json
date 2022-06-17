@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "48267947-aafe-4956-bce5-00959361397d",
+		"name": "xing-challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Review",
+			"item": [
+				{
+					"name": "Params Fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('fail', function()",
+									"{",
+									"    pm.response.to.have.status(400);",
+									"    pm.response.to.have.jsonBody(\"errorCode\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-AUTH-TOKEN",
+								"value": "user1token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"pro\": \"great salary, great benefits\",\n   \"contra\": \"something bad\",\n   \"suggestions\":  \"be better\",\n   \"company\": 1,\n   \"rating\": {\n       \"culture\": 1,\n       \"management\": 2,\n       \"workLifeBalance\": 1,\n       \"careerDevelopment\": 1 \n   }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/review",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"review"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('success', function()",
+									"{",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.not.have.jsonBody(\"errorCode\");",
+									"    pm.response.to.have.jsonBody(\"title\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-AUTH-TOKEN",
+								"value": "user1token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"title\": \"overall good company\",\n   \"pro\": \"great salary, great benefits\",\n   \"contra\": \"something bad\",\n   \"suggestions\":  \"be better\",\n   \"company\": 1,\n   \"rating\": {\n       \"culture\": 1,\n       \"management\": 2,\n       \"workLifeBalance\": 1,\n       \"careerDevelopment\": 1 \n   }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/review",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"review"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List Best Companies",
+			"item": [
+				{
+					"name": "Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('success', function()",
+									"{",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.not.have.jsonBody(\"errorCode\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-AUTH-TOKEN",
+								"value": "user1token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/company/best",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"company",
+								"best"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
